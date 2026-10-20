@@ -1,211 +1,75 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Secretaria · Ala Ipanema</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap">
-<script>try{document.documentElement.dataset.theme=localStorage.getItem('tema')||'dark'}catch(e){document.documentElement.dataset.theme='dark'}</script>
-<style>
-:root{--paper:#F3F6F4;--ink:#12312B;--mut:#5B6F68;--line:#C9D5CF;--acc:#1F6F5B;--accfg:#fff;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#0F1B18;--ink:#E6EFEA;--mut:#93A8A0;--line:#2B433B;--acc:#4FB79A;--accfg:#06130F;color-scheme:dark}}
-:root[data-theme="dark"]{--paper:#0F1B18;--ink:#E6EFEA;--mut:#93A8A0;--line:#2B433B;--acc:#4FB79A;--accfg:#06130F;color-scheme:dark}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
-body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 "Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--paper);z-index:10}
-main{max-width:640px;margin:0 auto;padding:28px 20px 150px}
-h1{font-size:2.1rem;line-height:1.1;margin:.15em 0 .35em;letter-spacing:-.01em}
-.mut{color:var(--mut);font-size:.95rem;margin:0}
-.tools{margin-top:28px}
-.tool{display:block;width:100%;text-align:left;background:none;border:0;border-top:1px solid var(--line);padding:18px 0;color:inherit;font:inherit}
-.tool b{display:block;font-size:1.2rem}
-.tool span{color:var(--mut);font-size:.95rem}
-.tool.on{cursor:pointer;border-left:4px solid var(--acc);padding-left:14px}
-.tool[disabled]{opacity:.55}
-.back{background:none;border:0;color:var(--acc);font:inherit;font-weight:700;padding:8px 0;min-height:44px;cursor:pointer}
-fieldset{border:0;border-top:2px solid var(--ink);margin:30px 0 0;padding:6px 0 0;min-width:0}
-legend{font-weight:700;font-size:1.15rem;padding:0 10px 0 0}
-.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px 18px;margin-top:10px}
-.wide{grid-column:1/-1}
-label{display:block;font-size:.85rem;color:var(--mut)}
-input[type=text],input[type=time],input[type=date],input[type=number],textarea{display:block;width:100%;box-sizing:border-box;border:0;border-bottom:2px solid var(--line);border-radius:0;background:transparent;color:var(--ink);font:inherit;font-size:1.05rem;padding:6px 0;min-height:44px}
-textarea{min-height:92px;resize:vertical}
-.on{border-bottom-color:var(--acc)!important}
-.ck{display:flex;gap:10px;align-items:center;font-size:1rem;color:var(--ink);min-height:44px}
-.ck input{width:22px;height:22px;accent-color:var(--acc)}
-:focus-visible{outline:3px solid var(--acc);outline-offset:3px}
-.bar{position:fixed;left:0;right:0;bottom:0;background:var(--paper);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));z-index:5}
-.bar div{max-width:640px;margin:0 auto;display:flex;gap:10px}
-#st{max-width:640px;margin:0 auto 8px;min-height:1.3em;font-size:.95rem;color:var(--mut)}
-#st.err{color:#B3261E}
-.btn{min-height:48px;padding:0 20px;border-radius:10px;border:1.5px solid var(--ink);background:transparent;color:var(--ink);font:inherit;font-weight:700;cursor:pointer}
-.btn.p{flex:1;background:var(--acc);border-color:var(--acc);color:var(--accfg)}
-.hd{max-width:640px;margin:0 auto;padding:6px 20px 0;display:flex;justify-content:space-between;align-items:center;color:var(--mut);font-size:.95rem}
-#sug{position:absolute;z-index:20;margin:0;padding:4px 0;list-style:none;background:var(--paper);border:1px solid var(--ink);border-radius:10px;max-height:264px;overflow:auto}
-#sug li{padding:10px 14px;cursor:pointer}
-#sug li:hover{background:var(--line)}
-#sug b{color:var(--acc);margin-right:8px}
-[hidden]{display:none!important}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Secretaria · Ala Ipanema</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@3.0.4/dist/jspdf.umd.min.js"></script>
+  
+  <script>
+    try { document.documentElement.dataset.theme = localStorage.getItem('tema') || 'dark'; }
+    catch(e) { document.documentElement.dataset.theme = 'dark'; }
+  </script>
+  
+  <style>
+    :root { --paper: #F3F6F4; --ink: #12312B; --mut: #5B6F68; --line: #C9D5CF; --acc: #1F6F5B; --accfg: #fff; color-scheme: light; box-sizing: border-box; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+    @media(prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --paper: #0F1B18; --ink: #E6EFEA; --mut: #93A8A0; --line: #2B433B; --acc: #4FB79A; --accfg: #06130F; color-scheme: dark; } }
+    :root[data-theme="dark"] { --paper: #0F1B18; --ink: #E6EFEA; --mut: #93A8A0; --line: #2B433B; --acc: #4FB79A; --accfg: #06130F; color-scheme: dark; }
+    html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 17px/1.5 "Atkinson Hyperlegible", system-ui, -apple-system, sans-serif; }
+    body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); background: var(--paper); z-index: 10; }
+    main { max-width: 640px; margin: 0 auto; padding: 28px 20px 150px; }
+    h1 { font-size: 2.1rem; line-height: 1.1; margin: .15em 0 .35em; letter-spacing: -.01em; }
+    .mut { color: var(--mut); font-size: .95rem; margin: 0; }
+    .tools { margin-top: 28px; }
+    .tool { display: block; width: 100%; text-align: left; background: none; border: 0; border-top: 1px solid var(--line); padding: 18px 0; color: inherit; font: inherit; }
+    .tool b { display: block; font-size: 1.2rem; }
+    .tool span { color: var(--mut); font-size: .95rem; }
+    .tool.on { cursor: pointer; border-left: 4px solid var(--acc); padding-left: 14px; }
+    .tool[disabled] { opacity: .55; }
+    .back { background: none; border: 0; color: var(--acc); font: inherit; font-weight: 700; padding: 8px 0; min-height: 44px; cursor: pointer; }
+    fieldset { border: 0; border-top: 2px solid var(--ink); margin: 30px 0 0; padding: 6px 0 0; min-width: 0; }
+    legend { font-weight: 700; font-size: 1.15rem; padding: 0 10px 0 0; }
+    .g { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px 18px; margin-top: 10px; }
+    .wide { grid-column: 1 / -1; }
+    label { display: block; font-size: .85rem; color: var(--mut); }
+    input[type=text], input[type=time], input[type=date], input[type=number], textarea { display: block; width: 100%; box-sizing: border-box; border: 0; border-bottom: 2px solid var(--line); border-radius: 0; background: transparent; color: var(--ink); font: inherit; font-size: 1.05rem; padding: 6px 0; min-height: 44px; }
+    textarea { min-height: 92px; resize: vertical; }
+    .on { border-bottom-color: var(--acc) !important; }
+    .ck { display: flex; gap: 10px; align-items: center; font-size: 1rem; color: var(--ink); min-height: 44px; }
+    .ck input { width: 22px; height: 22px; accent-color: var(--acc); }
+    :focus-visible { outline: 3px solid var(--acc); outline-offset: 3px; }
+    .bar { position: fixed; left: 0; right: 0; bottom: 0; background: var(--paper); border-top: 1px solid var(--line); padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px)); z-index: 5; }
+    .bar div.actions { max-width: 640px; margin: 0 auto; display: flex; gap: 10px; }
+    #st { max-width: 640px; margin: 0 auto 8px; min-height: 1.3em; font-size: .95rem; color: var(--mut); }
+    #st.err { color: #B3261E; }
+    #st.succ { color: var(--acc); font-weight: bold; }
+    .btn { min-height: 48px; padding: 0 20px; border-radius: 10px; border: 1.5px solid var(--ink); background: transparent; color: var(--ink); font: inherit; font-weight: 700; cursor: pointer; }
+    .btn.p { flex: 1; background: var(--acc); border-color: var(--acc); color: var(--accfg); }
+    .btn.sec { flex: 1; border-color: var(--acc); color: var(--acc); }
+    .hd { max-width: 640px; margin: 0 auto; padding: 6px 20px 0; display: flex; justify-content: space-between; align-items: center; color: var(--mut); font-size: .95rem; }
+    #sug { position: absolute; z-index: 20; margin: 0; padding: 4px 0; list-style: none; background: var(--paper); border: 1px solid var(--ink); border-radius: 10px; max-height: 264px; overflow: auto; }
+    #sug li { padding: 10px 14px; cursor: pointer; }
+    #sug li:hover { background: var(--line); }
+    #sug b { color: var(--acc); margin-right: 8px; }
+    .list-item { padding: 16px 0; border-bottom: 1px solid var(--line); cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+    .list-item:hover { background: rgba(0,0,0,0.05); }
+    .list-item b { display: block; font-size: 1.1rem; }
+    .list-item span { color: var(--mut); font-size: 0.9rem; }
+    .empty-state { text-align: center; padding: 40px 0; color: var(--mut); }
+  </style>
 </head>
 <body>
-<header class="hd"><span>Ala Ipanema</span><button class="back" id="tema" type="button"></button></header>
-<main id="home">
-  <h1>Secretaria</h1>
-  <p class="mut">Ferramentas para o dia a dia da secretaria. Nada é salvo: o que tu digita fica só na tela e some ao fechar a página.</p>
-  <div class="tools">
-    <button class="tool on" id="open-ata"><b>Gerador de atas</b><span>Preencha o programa da reunião sacramental e baixe o PDF em 1 folha. O que ficar vazio sai como linha para escrever à mão.</span></button>
-    <button class="tool" disabled><b>Atualizações do Manual</b><span>Em breve</span></button>
-    <button class="tool" disabled><b>Transmissão</b><span>Em breve</span></button>
-    <button class="tool" disabled><b>Contagem de frequência</b><span>Em breve</span></button>
-  </div>
-</main>
+  <div id="root"></div>
 
-<main id="ata" hidden>
-  <button class="back" id="back">‹ Início</button>
-  <h1>Ata da reunião sacramental</h1>
-  <p class="mut">Preencha o que já sabe. Campos vazios saem no PDF como linha em branco, para completar à mão. Linha verde = preenchido.</p>
-  <form id="form" onsubmit="return false"></form>
-</main>
-
-<div class="bar" id="bar" hidden>
-  <div id="st" role="status" aria-live="polite"></div>
-  <div><button class="btn" id="clear" type="button">Limpar</button><button class="btn p" id="gen" type="button">Gerar PDF</button></div>
-</div>
-
-<ul id="sug" role="listbox" hidden></ul>
-<script src="https://cdn.jsdelivr.net/npm/jspdf@3.0.4/dist/jspdf.umd.min.js"></script>
-<script>
-const $=id=>document.getElementById(id);
-const S=[
-['Informações',[['ala','Ala'],['data','Data','date'],['freq','Frequência','number'],['presidida','Presidida'],['dirigida','Dirigida'],['regente','Regente'],['pianista','Pianista']]],
-['Abertura',[['boasvindas','Boas-vindas e reconhecimento de autoridades e líderes'],['anuncios','Anúncios','area','Um por linha'],['hinoAbertura','Hino de abertura','text','Número ou nome do hino'],['oracaoAbertura','Oração de abertura']]],
-['Assuntos da ala e da estaca',[['assuntos','Apoios, desobrigações e outros assuntos','area','Um por linha. Ex.: APOIAR: nome - chamado']]],
-['Sacramento',[['hinoSacramental','Hino sacramental','text','Número ou nome do hino'],['incluirOr','Incluir no PDF as orações do pão e da água','check']]],
-['Mensagens do evangelho',[['orador1','Primeiro orador'],['orador2','Segundo orador'],['hinoInter','Hino intermediário','text','Número ou nome do hino'],['orador3','Último orador']]],
-['Encerramento',[['ultimoHino','Último hino','text','Número ou nome do hino'],['ultimaOracao','Última oração']]]
-];
-const IDS=S.flatMap(s=>s[1].map(f=>f[0])).filter(i=>i!=='incluirOr');
-const WIDE=['boasvindas','recep','anuncios','assuntos'];
-$('form').innerHTML=S.map(([t,fs])=>`<fieldset><legend>${t}</legend><div class="g">${fs.map(([id,l,k,ph])=>k==='check'
- ?`<label class="ck wide"><input type="checkbox" id="${id}" checked> ${l}</label>`
- :`<div class="${WIDE.includes(id)?'wide':''}"><label for="${id}">${l}</label>${k==='area'?`<textarea id="${id}" placeholder="${ph||''}"></textarea>`:`<input id="${id}" type="${k||'text'}" ${k==='number'?'inputmode="numeric"':''} placeholder="${ph||''}" autocomplete="off">`}</div>`).join('')}</div></fieldset>`).join('');
-
-const p2=n=>String(n).padStart(2,'0');
-function nextSunday(){const t=new Date();t.setDate(t.getDate()+(7-t.getDay())%7);return t.getFullYear()+'-'+p2(t.getMonth()+1)+'-'+p2(t.getDate())}
-function reset(){IDS.forEach(i=>$(i).value='');$('ala').value='Ipanema';$('data').value=nextSunday();$('incluirOr').checked=true;IDS.forEach(i=>$(i).classList.toggle('on',!!$(i).value))}
-reset();
-$('form').addEventListener('input',e=>{if(e.target.type!=='checkbox')e.target.classList.toggle('on',!!e.target.value.trim())});
-
-function go(v){$('home').hidden=v!=='home';$('ata').hidden=v!=='ata';$('bar').hidden=v!=='ata';window.scrollTo(0,0)}
-$('open-ata').onclick=()=>go('ata');$('back').onclick=()=>go('home');
-$('clear').onclick=()=>{reset();msg('Formulário limpo.')};
-function msg(t,err){const s=$('st');s.textContent=t;s.className=err?'err':''}
-
-const PAO='Ó Deus, Pai Eterno, nós te rogamos em nome de teu Filho, Jesus Cristo, que abençoes e santifiques este pão para as almas de todos os que partilharem dele, para que o comam em lembrança do corpo de teu Filho e testifiquem a ti, ó Deus, Pai Eterno, que desejam tomar sobre si o nome de teu Filho e recordá-lo sempre e guardar os mandamentos que ele lhes deu, para que possam ter sempre consigo o seu Espírito. Amém.';
-const AGUA='Ó Deus, Pai Eterno, nós te rogamos em nome de teu Filho, Jesus Cristo, que abençoes e santifiques esta água, para as almas de todos os que beberem dela, para que o façam em lembrança do sangue de teu Filho, que por eles foi derramado, e testifiquem a ti, ó Deus, Pai Eterno, que sempre se lembram dele, para que possam ter consigo o seu Espírito. Amém.';
-const NOTA='Apoio e desobrigações / Apresentação dos apoiados no S. Aarônico / Reconhecimento de membros e recém-conversos na ala / Abençoar e dar nome a crianças / Confirmação de novos conversos';
-const fd=s=>s?s.split('-').reverse().join('/'):'';
-const lines=s=>(s||'').split('\n').map(t=>t.trim()).filter(Boolean);
-
-function buildPdf(d,s){
-  const doc=new window.jspdf.jsPDF({unit:'mm',format:'a4'});
-  const M=12,CW=186,PH=297,LH=4.6*s,P=2*s,MH=8*s,GAP=2.6*s,BH=5.6*s,F=10*s,INK=[18,49,43];
-  let y=M,over=false;
-  doc.setDrawColor(130,145,138);doc.setLineWidth(.25);
-  const need=h=>{if(y+h>PH-M)over=true};
-  const txt=(t,x,yy,st='normal',sz=F,col=INK)=>{doc.setFont('helvetica',st);doc.setFontSize(sz);doc.setTextColor(col[0],col[1],col[2]);doc.text(t,x,yy)};
-  const bar=n=>{need(BH);doc.setFillColor(INK[0],INK[1],INK[2]);doc.rect(M,y,CW,BH,'F');txt(n.toUpperCase(),M+P,y+BH*.72,'bold',F*.95,[255,255,255]);y+=BH};
-  const cells=a=>{
-    const m=a.map(([l,v,w])=>{
-      doc.setFont('helvetica','bold');doc.setFontSize(F);
-      const lw=doc.getTextWidth(l+':')+1.5*s,st=lw>w*.55;
-      doc.setFont('helvetica','normal');
-      return{l,w,lw,st,t:v?doc.splitTextToSize(v,st?w-2*P:w-2*P-lw):[]};
-    });
-    const h=Math.max(MH,...m.map(c=>2*P+(c.st?LH:0)+Math.max(1,c.t.length)*LH-s));
-    need(h);let x=M;
-    m.forEach(c=>{
-      doc.rect(x,y,c.w,h);const b=y+P+F*.31;
-      txt(c.l+':',x+P,b,'bold');
-      const x0=c.st?x+P:x+P+c.lw,b0=c.st?b+LH:b;
-      if(c.t.length)c.t.forEach((q,i)=>txt(q,x0,b0+i*LH));
-      else doc.line(x0,b0+.9*s,x+c.w-P,b0+.9*s);
-      x+=c.w;
-    });
-    y+=h;
-  };
-  const list=(label,note,items)=>{
-    doc.setFont('helvetica','normal');doc.setFontSize(F);
-    const L=[];items.forEach(t=>doc.splitTextToSize(t,CW-2*P-5*s).forEach((q,i)=>L.push([i?'':'-',q])));
-    const NL=LH*.9,nl=note?doc.splitTextToSize(note,CW-2*P):[];
-    const h=2*P+(label?LH:0)+nl.length*NL+Math.max(L.length,2)*LH;
-    need(h);doc.rect(M,y,CW,h);let yy=y+P+F*.31;
-    if(label){txt(label+':',M+P,yy,'bold');yy+=LH}
-    nl.forEach(q=>{txt(q,M+P,yy,'italic',F*.85,[90,105,98]);yy+=NL});
-    if(L.length)L.forEach(([b,q])=>{txt(b,M+P,yy);txt(q,M+P+5*s,yy);yy+=LH});
-    else for(let i=0;i<2;i++){doc.line(M+P,yy+.9*s,M+CW-P,yy+.9*s);yy+=LH}
-    y+=h;
-  };
-  const prayer=(label,text)=>{
-    doc.setFont('helvetica','normal');doc.setFontSize(F*.9);
-    const t=doc.splitTextToSize(text,CW-2*P),PL=LH*.9,h=2*P+LH+t.length*PL;
-    need(h);doc.rect(M,y,CW,h);
-    txt(label+':',M+P,y+P+F*.31,'bold');
-    t.forEach((q,i)=>txt(q,M+P,y+P+F*.31+LH+i*PL,'normal',F*.9));
-    y+=h;
-  };
-
-  const T=17*s,tb=y+T*.3;
-  txt('Ata - Ala '+(d.ala||'')+(d.data?' - '+fd(d.data):''),M,tb,'bold',T);
-  doc.setFont('helvetica','bold');doc.setFontSize(F);
-  const rx=M+CW,fw=26*s,fl='Freq.:',flw=doc.getTextWidth(fl)+1.5;
-  txt(fl,rx-fw-flw,tb,'bold');
-  if(d.freq)txt(d.freq,rx-fw+1,tb);else doc.line(rx-fw,tb+.9,rx,tb+.9);
-  y+=T*.3+3.4*s;
-
-  bar('Informações');
-  cells([['Presidida',d.presidida,CW/2],['Dirigida',d.dirigida,CW/2]]);
-  cells([['Regente',d.regente,CW/2],['Pianista',d.pianista,CW/2]]);
-  y+=GAP;bar('Abertura');
-  cells([['Boas-vindas / Reconhecimentos de autoridades e líderes',d.boasvindas,CW]]);
-  list('Anúncios','',lines(d.anuncios));
-  cells([['Hino de abertura',d.hinoAbertura,CW/2],['Oração de abertura',d.oracaoAbertura,CW/2]]);
-  y+=GAP;bar('Assuntos da ala e da estaca');
-  list('',NOTA,lines(d.assuntos));
-  y+=GAP;bar('Sacramento');
-  cells([['Hino sacramental',d.hinoSacramental,CW]]);
-  if(d.incluirOr){prayer('Benção do Pão',PAO);prayer('Benção da Água',AGUA)}
-  y+=GAP;bar('Mensagens do evangelho');
-  cells([['Primeiro orador',d.orador1,CW]]);
-  cells([['Segundo orador',d.orador2,CW]]);
-  cells([['Hino intermediário',d.hinoInter,CW]]);
-  cells([['Último orador',d.orador3,CW]]);
-  y+=GAP;bar('Encerramento');
-  cells([['Último hino',d.ultimoHino,CW/2],['Última oração',d.ultimaOracao,CW/2]]);
-  return{doc,over,s};
-}
-function fit(d){let r;for(let k=20;k>=10;k--){r=buildPdf(d,k/20);if(!r.over)break}return r}
-
-$('gen').onclick=async()=>{
-  if(!window.jspdf){msg('A biblioteca de PDF não carregou. Confira a internet e recarregue a página.',1);return}
-  const d={};IDS.forEach(i=>d[i]=$(i).value.trim());d.incluirOr=$('incluirOr').checked;
-  let r;try{r=fit(d)}catch(e){msg('Não foi possível gerar o PDF. Recarregue a página e tente de novo.',1);return}
-  const blob=r.doc.output('blob');
-  const slug=(d.ala||'ala').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
-  const nome='ata-ala-'+slug+'-'+(d.data||'sem-data')+'.pdf';
-  const nota=r.over?' Atenção: conteúdo demais, parte pode ter ficado de fora.':r.s<.8?' Letras reduzidas para caber em 1 folha.':'';
-  try{
-    const dl=window.claude&&claude.use?await claude.use('downloads'):null;
-    if(dl){await dl.save({filename:nome,data:blob})}
-    else{const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=nome;document.body.appendChild(a);a.click();a.remove()}
-    msg('PDF pronto: '+nome+nota);
-  }catch(e){msg(e&&e.code==='declined'?'Download cancelado. Toque em Gerar PDF para tentar de novo.':'Não foi possível entregar o arquivo. Tente de novo.',1)}
-};
-
-/* Lista de hinos: hinário e Hinos para o Lar e para a Igreja */
-const HRAW=`1|A Alva Rompe
+<script type="text/babel">
+const HRAW = `1|A Alva Rompe
 2|Tal Como um Facho
 3|Alegres Cantemos
 4|No Monte a Bandeira
@@ -492,37 +356,421 @@ const HRAW=`1|A Alva Rompe
 1209|Bebezinho no presépio
 1210|Os jardins`;
 const nz=t=>t.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[-\s]+/g,' ').trim();
-const H=HRAW.split('\n').filter(Boolean).map(l=>{const i=l.indexOf('|'),n=l.slice(0,i),t=l.slice(i+1);return{n,t,k:nz(n+' '+t)}});
-const sug=$('sug');let cur=null;
-function hide(){sug.hidden=true;cur=null}
-function pick(n){const h=H.find(x=>x.n===n);if(!h||!cur)return;cur.value=h.n+' - '+h.t;cur.classList.add('on');hide()}
-function show(inp){
-  cur=inp;const q=nz(inp.value);
-  let r=!q?[]:/^\d+$/.test(q)?H.filter(h=>h.n.startsWith(q)):H.filter(h=>h.k.includes(q));
-  r=r.sort((a,b)=>(b.n===q)-(a.n===q)||a.n-b.n).slice(0,8);
-  if(!r.length){hide();return}
-  sug.innerHTML=r.map(h=>'<li data-n="'+h.n+'"><b>'+h.n+'</b>'+h.t+'</li>').join('');
-  const b=inp.getBoundingClientRect();
-  sug.style.left=(b.left+window.scrollX)+'px';sug.style.width=b.width+'px';sug.hidden=false;
-  const hh=sug.offsetHeight,up=b.bottom+hh+100>innerHeight&&b.top>hh+10;
-  sug.style.top=(up?b.top+window.scrollY-hh-4:b.bottom+window.scrollY+4)+'px';
-}
-sug.addEventListener('pointerdown',e=>{const li=e.target.closest('li');if(li){e.preventDefault();pick(li.dataset.n)}});
-['hinoAbertura','hinoSacramental','hinoInter','ultimoHino'].forEach(id=>{
-  const e=$(id);
-  e.addEventListener('input',()=>show(e));
-  e.addEventListener('blur',()=>setTimeout(hide,150));
-  e.addEventListener('keydown',ev=>{
-    if(ev.key==='Escape')hide();
-    if(ev.key==='Enter'&&!sug.hidden&&sug.firstElementChild){ev.preventDefault();pick(sug.firstElementChild.dataset.n)}
-  });
-});
+const HYMNS=HRAW.split('\n').filter(Boolean).map(l=>{const i=l.indexOf('|'),n=l.slice(0,i),t=l.slice(i+1);return{n,t,k:nz(n+' '+t)}});
 
-/* Tema claro/escuro (padrão: escuro) */
-const root=document.documentElement,tbtn=$('tema');
-const setT=t=>{root.dataset.theme=t;tbtn.textContent=t==='dark'?'Tema claro':'Tema escuro'};
-setT(root.dataset.theme||'dark');
-tbtn.onclick=()=>{const t=root.dataset.theme==='dark'?'light':'dark';setT(t);try{localStorage.setItem('tema',t)}catch(e){}};
+const PAO='Ó Deus, Pai Eterno, nós te rogamos em nome de teu Filho, Jesus Cristo, que abençoes e santifiques este pão para as almas de todos os que partilharem dele, para que o comam em lembrança do corpo de teu Filho e testifiquem a ti, ó Deus, Pai Eterno, que desejam tomar sobre si o nome de teu Filho e recordá-lo sempre e guardar os mandamentos que ele lhes deu, para que possam ter sempre consigo o seu Espírito. Amém.';
+const AGUA='Ó Deus, Pai Eterno, nós te rogamos em nome de teu Filho, Jesus Cristo, que abençoes e santifiques esta água, para as almas de todos os que beberem dela, para que o façam em lembrança do sangue de teu Filho, que por eles foi derramado, e testifiquem a ti, ó Deus, Pai Eterno, que sempre se lembram dele, para que possam ter consigo o seu Espírito. Amém.';
+const NOTA='Apoio e desobrigações / Apresentação dos apoiados no S. Aarônico / Reconhecimento de membros e recém-conversos na ala / Abençoar e dar nome a crianças / Confirmação de novos conversos';
+
+const fd=s=>s?s.split('-').reverse().join('/'):'';
+const lines=s=>(s||'').split('\n').map(t=>t.trim()).filter(Boolean);
+const p2=n=>String(n).padStart(2,'0');
+function nextSunday(){const t=new Date();t.setDate(t.getDate()+(7-t.getDay())%7);return t.getFullYear()+'-'+p2(t.getMonth()+1)+'-'+p2(t.getDate())}
+
+function buildPdf(d,s){
+  const doc=new window.jspdf.jsPDF({unit:'mm',format:'a4'});
+  const M=12,CW=186,PH=297,LH=4.6*s,P=2*s,MH=8*s,GAP=2.6*s,BH=5.6*s,F=10*s,INK=[18,49,43];
+  let y=M,over=false;
+  doc.setDrawColor(130,145,138);doc.setLineWidth(.25);
+  const need=h=>{if(y+h>PH-M)over=true};
+  const txt=(t,x,yy,st='normal',sz=F,col=INK)=>{doc.setFont('helvetica',st);doc.setFontSize(sz);doc.setTextColor(col[0],col[1],col[2]);doc.text(t,x,yy)};
+  const bar=n=>{need(BH);doc.setFillColor(INK[0],INK[1],INK[2]);doc.rect(M,y,CW,BH,'F');txt(n.toUpperCase(),M+P,y+BH*.72,'bold',F*.95,[255,255,255]);y+=BH};
+  const cells=a=>{
+    const m=a.map(([l,v,w])=>{
+      doc.setFont('helvetica','bold');doc.setFontSize(F);
+      const lw=doc.getTextWidth(l+':')+1.5*s,st=lw>w*.55;
+      doc.setFont('helvetica','normal');
+      return{l,w,lw,st,t:v?doc.splitTextToSize(v,st?w-2*P:w-2*P-lw):[]};
+    });
+    const h=Math.max(MH,...m.map(c=>2*P+(c.st?LH:0)+Math.max(1,c.t.length)*LH-s));
+    need(h);let x=M;
+    m.forEach(c=>{
+      doc.rect(x,y,c.w,h);const b=y+P+F*.31;
+      txt(c.l+':',x+P,b,'bold');
+      const x0=c.st?x+P:x+P+c.lw,b0=c.st?b+LH:b;
+      if(c.t.length)c.t.forEach((q,i)=>txt(q,x0,b0+i*LH));
+      else doc.line(x0,b0+.9*s,x+c.w-P,b0+.9*s);
+      x+=c.w;
+    });
+    y+=h;
+  };
+  const list=(label,note,items)=>{
+    doc.setFont('helvetica','normal');doc.setFontSize(F);
+    const L=[];items.forEach(t=>doc.splitTextToSize(t,CW-2*P-5*s).forEach((q,i)=>L.push([i?'':'-',q])));
+    const NL=LH*.9,nl=note?doc.splitTextToSize(note,CW-2*P):[];
+    const h=2*P+(label?LH:0)+nl.length*NL+Math.max(L.length,2)*LH;
+    need(h);doc.rect(M,y,CW,h);let yy=y+P+F*.31;
+    if(label){txt(label+':',M+P,yy,'bold');yy+=LH}
+    nl.forEach(q=>{txt(q,M+P,yy,'italic',F*.85,[90,105,98]);yy+=NL});
+    if(L.length)L.forEach(([b,q])=>{txt(b,M+P,yy);txt(q,M+P+5*s,yy);yy+=LH});
+    else for(let i=0;i<2;i++){doc.line(M+P,yy+.9*s,M+CW-P,yy+.9*s);yy+=LH}
+    y+=h;
+  };
+  const prayer=(label,text)=>{
+    doc.setFont('helvetica','normal');doc.setFontSize(F*.9);
+    const t=doc.splitTextToSize(text,CW-2*P),PL=LH*.9,h=2*P+LH+t.length*PL;
+    need(h);doc.rect(M,y,CW,h);
+    txt(label+':',M+P,y+P+F*.31,'bold');
+    t.forEach((q,i)=>txt(q,M+P,y+P+F*.31+LH+i*PL,'normal',F*.9));
+    y+=h;
+  };
+
+  const T=17*s,tb=y+T*.3;
+  txt('Ata - Ala '+(d.ala||'')+(d.data?' - '+fd(d.data):''),M,tb,'bold',T);
+  doc.setFont('helvetica','bold');doc.setFontSize(F);
+  const rx=M+CW,fw=26*s,fl='Freq.:',flw=doc.getTextWidth(fl)+1.5;
+  txt(fl,rx-fw-flw,tb,'bold');
+  if(d.freq)txt(d.freq,rx-fw+1,tb);else doc.line(rx-fw,tb+.9,rx,tb+.9);
+  y+=T*.3+3.4*s;
+
+  bar('Informações');
+  cells([['Presidida',d.presidida,CW/2],['Dirigida',d.dirigida,CW/2]]);
+  cells([['Regente',d.regente,CW/2],['Pianista',d.pianista,CW/2]]);
+  y+=GAP;bar('Abertura');
+  cells([['Boas-vindas / Reconhecimentos de autoridades e líderes',d.boasvindas,CW]]);
+  list('Anúncios','',lines(d.anuncios));
+  cells([['Hino de abertura',d.hinoAbertura,CW/2],['Oração de abertura',d.oracaoAbertura,CW/2]]);
+  y+=GAP;bar('Assuntos da ala e da estaca');
+  list('',NOTA,lines(d.assuntos));
+  y+=GAP;bar('Sacramento');
+  cells([['Hino sacramental',d.hinoSacramental,CW]]);
+  if(d.incluirOr){prayer('Benção do Pão',PAO);prayer('Benção da Água',AGUA)}
+  y+=GAP;bar('Mensagens do evangelho');
+  cells([['Primeiro orador',d.orador1,CW]]);
+  cells([['Segundo orador',d.orador2,CW]]);
+  cells([['Hino intermediário',d.hinoInter,CW]]);
+  cells([['Último orador',d.orador3,CW]]);
+  y+=GAP;bar('Encerramento');
+  cells([['Último hino',d.ultimoHino,CW/2],['Última oração',d.ultimaOracao,CW/2]]);
+  return{doc,over,s};
+}
+
+const db = {
+  get: () => {
+    try {
+      const data = localStorage.getItem('atas_ala');
+      return data ? JSON.parse(data) : [];
+    } catch(e) { return []; }
+  },
+  save: (ata) => {
+    try {
+      let atas = db.get();
+      if (ata.id) {
+        atas = atas.map(a => a.id === ata.id ? ata : a);
+      } else {
+        ata.id = Date.now().toString();
+        atas.push(ata);
+      }
+      atas.sort((a,b) => b.data.localeCompare(a.data));
+      localStorage.setItem('atas_ala', JSON.stringify(atas));
+      return ata;
+    } catch(e) { console.error('Erro ao salvar', e); return null; }
+  },
+  delete: (id) => {
+    try {
+      let atas = db.get().filter(a => a.id !== id);
+      localStorage.setItem('atas_ala', JSON.stringify(atas));
+      return true;
+    } catch(e) { return false; }
+  }
+};
+
+const SECTIONS = [
+  ['Informações', [['ala','Ala'],['data','Data','date'],['freq','Frequência','number'],['presidida','Presidida'],['dirigida','Dirigida'],['regente','Regente'],['pianista','Pianista']]],
+  ['Abertura', [['boasvindas','Boas-vindas e reconhecimento de autoridades e líderes'],['anuncios','Anúncios','area','Um por linha'],['hinoAbertura','Hino de abertura','text','Número ou nome do hino', true],['oracaoAbertura','Oração de abertura']]],
+  ['Assuntos da ala e da estaca', [['assuntos','Apoios, desobrigações e outros assuntos','area','Um por linha. Ex.: APOIAR: nome - chamado']]],
+  ['Sacramento', [['hinoSacramental','Hino sacramental','text','Número ou nome do hino', true],['incluirOr','Incluir no PDF as orações do pão e da água','check']]],
+  ['Mensagens do evangelho', [['orador1','Primeiro orador'],['orador2','Segundo orador'],['hinoInter','Hino intermediário','text','Número ou nome do hino', true],['orador3','Último orador']]],
+  ['Encerramento', [['ultimoHino','Último hino','text','Número ou nome do hino', true],['ultimaOracao','Última oração']]]
+];
+
+const WIDE = ['boasvindas', 'recep', 'anuncios', 'assuntos'];
+
+function Field({ id, label, type, placeholder, isHymn, value, onChange, onHymnInput, closeSug, onKeyDown }) {
+  const isWide = WIDE.includes(id);
+  
+  if (type === 'check') {
+    return (
+      <label className="ck wide">
+        <input type="checkbox" checked={value} onChange={e => onChange(id, e.target.checked)} />
+        {label}
+      </label>
+    );
+  }
+  
+  return (
+    <div className={isWide ? 'wide' : ''}>
+      <label htmlFor={id}>{label}</label>
+      {type === 'area' ? (
+        <textarea id={id} placeholder={placeholder} value={value} onChange={e => onChange(id, e.target.value)} className={value ? 'on' : ''} />
+      ) : (
+        <input
+          id={id}
+          type={type || 'text'}
+          inputMode={type === 'number' ? 'numeric' : undefined}
+          placeholder={placeholder}
+          autoComplete="off"
+          value={value}
+          onChange={e => {
+            onChange(id, e.target.value);
+            if (isHymn) onHymnInput(id, e.target.value, e.target);
+          }}
+          onFocus={e => {
+            if (isHymn) onHymnInput(id, e.target.value, e.target);
+          }}
+          onBlur={() => isHymn && setTimeout(closeSug, 150)}
+          onKeyDown={e => isHymn && onKeyDown(e, id)}
+          className={value ? 'on' : ''}
+        />
+      )}
+    </div>
+  );
+}
+
+function AtaEditor({ ata, onSave, onBack }) {
+  const [data, setData] = React.useState(ata || { ala: 'Ipanema', data: nextSunday(), incluirOr: true });
+  const [msg, setMsg] = React.useState({ text: '', err: false });
+  const [sug, setSug] = React.useState({ show: false, list: [], top: 0, left: 0, width: 0, fieldId: null });
+
+  const handleChange = (id, val) => {
+    setData(prev => ({ ...prev, [id]: val }));
+  };
+
+  const onHymnInput = (id, val, el) => {
+    if (!el) return;
+    const q = nz(val);
+    let r = !q ? [] : /^\d+$/.test(q) ? HYMNS.filter(h => h.n.startsWith(q)) : HYMNS.filter(h => h.k.includes(q));
+    r = r.sort((a,b) => (b.n===q)-(a.n===q) || a.n-b.n).slice(0,8);
+    
+    if (r.length > 0) {
+      const b = el.getBoundingClientRect();
+      const hh = 264, up = b.bottom + hh + 100 > window.innerHeight && b.top > hh + 10;
+      setSug({
+        show: true, list: r, 
+        top: up ? b.top + window.scrollY - hh - 4 : b.bottom + window.scrollY + 4,
+        left: b.left + window.scrollX, width: b.width, fieldId: id
+      });
+    } else {
+      setSug(prev => ({ ...prev, show: false }));
+    }
+  };
+
+  const closeSug = () => setSug(prev => ({ ...prev, show: false }));
+
+  const pickHymn = (n, fieldIdOverride = null) => {
+    const targetId = fieldIdOverride || sug.fieldId;
+    const h = HYMNS.find(x => x.n === n);
+    if (h && targetId) {
+      handleChange(targetId, h.n + ' - ' + h.t);
+      closeSug();
+    }
+  };
+
+  const handleKeyDown = (e, id) => {
+    if (e.key === 'Escape') closeSug();
+    if (e.key === 'Enter' && sug.show && sug.fieldId === id && sug.list.length > 0) {
+      e.preventDefault();
+      pickHymn(sug.list[0].n, id);
+    }
+  };
+
+  const handleClear = () => {
+    setData({ ala: 'Ipanema', data: nextSunday(), incluirOr: true });
+    setMsg({ text: 'Formulário limpo.', err: false });
+  };
+
+  const handleSave = () => {
+    const saved = db.save(data);
+    if (saved) {
+      setData(saved);
+      setMsg({ text: 'Ata salva com sucesso!', err: false });
+      setTimeout(() => setMsg({ text: '', err: false }), 3000);
+    } else {
+      setMsg({ text: 'Erro ao salvar ata.', err: true });
+    }
+  };
+
+  const handleGen = async () => {
+    if (!window.jspdf) {
+      setMsg({ text: 'A biblioteca de PDF não carregou. Recarregue a página.', err: true });
+      return;
+    }
+    
+    handleSave();
+    
+    let r;
+    try {
+      let fitRes;
+      for(let k=20; k>=10; k--){ fitRes = buildPdf(data, k/20); if(!fitRes.over) break; }
+      r = fitRes;
+    } catch(e) {
+      setMsg({ text: 'Não foi possível gerar o PDF.', err: true });
+      return;
+    }
+    
+    const blob = r.doc.output('blob');
+    const slug = (data.ala || 'ala').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+    const nome = 'ata-ala-'+slug+'-'+(data.data || 'sem-data')+'.pdf';
+    const nota = r.over ? ' Atenção: parte pode ter ficado de fora.' : r.s < .8 ? ' Letras reduzidas.' : '';
+    
+    try {
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = nome;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setMsg({ text: 'PDF pronto: ' + nome + nota, err: false });
+    } catch(e) {
+      setMsg({ text: 'Não foi possível entregar o arquivo.', err: true });
+    }
+  };
+
+  return (
+    <React.Fragment>
+      <main id="ata" style={{ paddingBottom: '180px' }}>
+        <button className="back" onClick={onBack}>‹ Voltar</button>
+        <h1>{data.id ? 'Editar Ata' : 'Nova Ata'}</h1>
+        <p className="mut">Preencha o que já sabe. Campos vazios saem no PDF como linha em branco, para completar à mão.</p>
+        
+        <form onSubmit={e => e.preventDefault()}>
+          {SECTIONS.map(([title, fields]) => (
+            <fieldset key={title}>
+              <legend>{title}</legend>
+              <div className="g">
+                {fields.map(([id, label, type, placeholder, isHymn]) => (
+                  <Field key={id} id={id} label={label} type={type} placeholder={placeholder} isHymn={isHymn}
+                         value={data[id] === undefined ? (type==='check'?false:'') : data[id]}
+                         onChange={handleChange} 
+                         onHymnInput={onHymnInput} 
+                         closeSug={closeSug}
+                         onKeyDown={handleKeyDown} />
+                ))}
+              </div>
+            </fieldset>
+          ))}
+        </form>
+      </main>
+
+      <div className="bar">
+        {msg.text && <div id="st" className={msg.err ? 'err' : 'succ'}>{msg.text}</div>}
+        <div className="actions">
+          <button className="btn" type="button" onClick={handleClear}>Limpar</button>
+          <button className="btn sec" type="button" onClick={handleSave}>Salvar</button>
+          <button className="btn p" type="button" onClick={handleGen}>Gerar PDF</button>
+        </div>
+      </div>
+
+      {sug.show && (
+        <ul id="sug" style={{ top: sug.top, left: sug.left, width: sug.width }}>
+          {sug.list.map(h => (
+            <li key={h.n} onPointerDown={e => { e.preventDefault(); pickHymn(h.n); }}>
+              <b>{h.n}</b>{h.t}
+            </li>
+          ))}
+        </ul>
+      )}
+    </React.Fragment>
+  );
+}
+
+function History({ onNew, onEdit }) {
+  const [atas, setAtas] = React.useState([]);
+
+  React.useEffect(() => {
+    setAtas(db.get());
+  }, []);
+
+  const handleDelete = (e, id) => {
+    e.stopPropagation();
+    if(confirm('Apagar esta ata?')) {
+      db.delete(id);
+      setAtas(db.get());
+    }
+  };
+
+  return (
+    <main>
+      <h1>Histórico de Atas</h1>
+      <p className="mut">Atas salvas na memória deste navegador. (Nenhum dado é enviado à internet).</p>
+      
+      <div style={{ marginTop: '20px' }}>
+        <button className="btn p" style={{ width: '100%' }} onClick={onNew}>+ Nova Ata</button>
+      </div>
+
+      <div style={{ marginTop: '30px' }}>
+        {atas.length === 0 ? (
+          <div className="empty-state">Nenhuma ata salva ainda.</div>
+        ) : (
+          atas.map(ata => (
+            <div key={ata.id} className="list-item" onClick={() => onEdit(ata)}>
+              <div>
+                <b>{fd(ata.data)} - {ata.ala}</b>
+                <span>{ata.presidida ? `Pres: ${ata.presidida}` : 'Sem presidente'}</span>
+              </div>
+              <button className="btn" style={{ minHeight: '32px', padding: '0 10px', fontSize: '0.85rem' }} 
+                      onClick={(e) => handleDelete(e, ata.id)}>Excluir</button>
+            </div>
+          ))
+        )}
+      </div>
+    </main>
+  );
+}
+
+function App() {
+  const [view, setView] = React.useState('home');
+  const [currentAta, setCurrentAta] = React.useState(null);
+
+  const toggleTheme = () => {
+    const root = document.documentElement;
+    const t = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    root.dataset.theme = t;
+    localStorage.setItem('tema', t);
+  };
+
+  return (
+    <React.Fragment>
+      <header className="hd">
+        <span onClick={() => setView('home')} style={{cursor: 'pointer'}}>Ala Ipanema</span>
+        <button className="back" type="button" onClick={toggleTheme}>Tema claro/escuro</button>
+      </header>
+
+      {view === 'home' && (
+        <main>
+          <h1>Secretaria</h1>
+          <p className="mut">Ferramentas para o dia a dia da secretaria.</p>
+          <div className="tools">
+            <button className="tool on" onClick={() => setView('history')}>
+              <b>Atas da Reunião Sacramental</b>
+              <span>Crie, edite e gere PDFs de reuniões. Seus dados ficam salvos apenas neste aparelho.</span>
+            </button>
+            <button className="tool" disabled><b>Atualizações do Manual</b><span>Em breve</span></button>
+            <button className="tool" disabled><b>Transmissão</b><span>Em breve</span></button>
+            <button className="tool" disabled><b>Frequência (Em nuvem)</b><span>Requer autorização (Trilha B)</span></button>
+          </div>
+        </main>
+      )}
+
+      {view === 'history' && (
+        <History 
+          onNew={() => { setCurrentAta(null); setView('editor'); }}
+          onEdit={(ata) => { setCurrentAta(ata); setView('editor'); }}
+        />
+      )}
+
+      {view === 'editor' && (
+        <AtaEditor 
+          ata={currentAta} 
+          onBack={() => { setView('history'); setCurrentAta(null); }} 
+        />
+      )}
+    </React.Fragment>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
 </script>
 </body>
 </html>
