@@ -1,0 +1,32 @@
+name: Verificar Manual
+
+on:
+  schedule:
+    - cron: "17 9 * * 1"   # segundas, 06:17 em Brasília (09:17 UTC)
+  workflow_dispatch:        # permite rodar à mão pela aba Actions
+
+permissions:
+  contents: write
+  pages: write
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verificar o Sumário de atualizações
+        run: python scripts/check_manual.py
+      - name: Gravar o resultado
+        run: |
+          git config user.name "manual-monitor"
+          git config user.email "manual-monitor@users.noreply.github.com"
+          git add data/manual-status.json
+          git diff --cached --quiet || (git commit -m "Manual: verificação $(date -u +%F)" && git push)
+      - name: Pedir a publicação do site
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "/repos/${{ github.repository }}/pages/builds"
