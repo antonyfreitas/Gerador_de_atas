@@ -5,6 +5,7 @@ Grava em data/manual-status.json só: o mês mais recente, a lista de meses, dat
 Não guarda nenhum texto da página. Faz uma requisição por execução e respeita o robots.txt.
 """
 import hashlib
+import html as htmllib
 import json
 import re
 import sys
@@ -12,7 +13,6 @@ import urllib.error
 import urllib.request
 import urllib.robotparser
 from datetime import datetime, timezone
-from html.parser import HTMLParser
 from pathlib import Path
 
 URL = "https://www.churchofjesuschrist.org/study/manual/general-handbook/summary-of-recent-updates?lang=por"
@@ -22,29 +22,8 @@ OUT = Path("data/manual-status.json")
 ERRO = Path("data/manual-erro.json")
 MESES = ["janeiro", "fevereiro", "março", "abril", "maio", "junho",
          "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"]
+RXM = re.compile(r"(" + "|".join(MESES) + r")\s+(?:de\s+)?(20\d\d)", re.I)
 RX = re.compile(r"\b(" + "|".join(MESES) + r")\s+(?:de\s+)?(20\d\d)\b", re.I)
-
-
-class Texto(HTMLParser):
-    """Extrai o texto visível, ignorando scripts, menus e rodapés."""
-    SKIP = {"script", "style", "noscript", "nav", "header", "footer", "svg", "button"}
-
-    def __init__(self):
-        super().__init__()
-        self.skip = 0
-        self.partes = []
-
-    def handle_starttag(self, tag, attrs):
-        if tag in self.SKIP:
-            self.skip += 1
-
-    def handle_endtag(self, tag):
-        if tag in self.SKIP and self.skip:
-            self.skip -= 1
-
-    def handle_data(self, data):
-        if not self.skip and data.strip():
-            self.partes.append(data.strip())
 
 
 def get(url):
@@ -79,16 +58,21 @@ def diagnostico(html):
     return f"scripts={html.count('<script')}; marcas={marcas}; ctx={ctx}"
 
 
+def limpar(t):
+    return re.sub(r"\s+", " ", htmllib.unescape(re.sub(r"<[^>]+>", "", t))).strip()
+
+
 def analisar(html):
-    p = Texto()
-    p.feed(html)
-    texto = re.sub(r"\s+", " ", " ".join(p.partes)).strip()
+    """Lê só os títulos (h2/h3). Os meses são títulos h2 no formato 'Outubro de 2026'."""
+    titulos = [limpar(m.group(1)) for m in re.finditer(r"<h[23][^>]*>(.*?)</h[23]>", html, re.I | re.S)]
     meses = []
-    for m in RX.finditer(texto):
-        k = f"{m.group(2)}-{MESES.index(m.group(1).lower()) + 1:02d}"
-        if k not in meses:
-            meses.append(k)
-    return texto, meses
+    for t in titulos:
+        m = RXM.fullmatch(t)
+        if m:
+            k = f"{m.group(2)}-{MESES.index(m.group(1).lower()) + 1:02d}"
+            if k not in meses:
+                meses.append(k)
+    return " | ".join(titulos), meses
 
 
 def main():
