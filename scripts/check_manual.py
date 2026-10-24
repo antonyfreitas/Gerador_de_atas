@@ -69,8 +69,14 @@ def falhar(msg):
     """Registra o motivo da falha em data/manual-erro.json e sai com erro (sem tocar no resultado anterior)."""
     hoje = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     ERRO.parent.mkdir(parents=True, exist_ok=True)
-    ERRO.write_text(json.dumps({"erroEm": hoje, "erro": str(msg)[:400]}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    ERRO.write_text(json.dumps({"erroEm": hoje, "erro": str(msg)[:900]}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     sys.exit(f"ERRO: {msg}")
+
+
+def diagnostico(html):
+    ctx = [re.sub(r"\s+", " ", m.group(0)) for m in re.finditer(r".{0,40}\bde 20\d\d.{0,20}", html)][:3]
+    marcas = [k for k in ("application/json", "__NEXT_DATA__", "__INITIAL", "window.__", "hydrat") if k in html]
+    return f"scripts={html.count('<script')}; marcas={marcas}; ctx={ctx}"
 
 
 def analisar(html):
@@ -105,7 +111,7 @@ def main():
         falhar(f"{type(e).__name__}: {e}")
     texto, meses = analisar(html)
     if not meses:
-        falhar(f"Nenhum mês encontrado (HTML com {len(html)} bytes, texto com {len(texto)} caracteres). Idioma ou layout mudou.")
+        falhar(f"Nenhum mês encontrado (HTML com {len(html)} bytes, texto com {len(texto)} caracteres). Idioma ou layout mudou. {diagnostico(html)}")
     hoje = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     topo = meses[0]
     th = hashlib.sha256(texto.encode("utf-8")).hexdigest()[:16]
