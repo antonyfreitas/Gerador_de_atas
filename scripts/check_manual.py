@@ -19,6 +19,7 @@ URL = "https://www.churchofjesuschrist.org/study/manual/general-handbook/summary
 ROBOTS = "https://www.churchofjesuschrist.org/robots.txt"
 UA = "secretaria-ala-monitor/1.0 (verificacao semanal de uma pagina publica; uso pessoal)"
 OUT = Path("data/manual-status.json")
+ERRO = Path("data/manual-erro.json")
 MESES = ["janeiro", "fevereiro", "março", "abril", "maio", "junho",
          "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"]
 RX = re.compile(r"\b(" + "|".join(MESES) + r")\s+(?:de\s+)?(20\d\d)\b", re.I)
@@ -64,6 +65,14 @@ def robots_ok():
     return rp.can_fetch(UA, URL)
 
 
+def falhar(msg):
+    """Registra o motivo da falha em data/manual-erro.json e sai com erro (sem tocar no resultado anterior)."""
+    hoje = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    ERRO.parent.mkdir(parents=True, exist_ok=True)
+    ERRO.write_text(json.dumps({"erroEm": hoje, "erro": str(msg)[:400]}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    sys.exit(f"ERRO: {msg}")
+
+
 def analisar(html):
     p = Texto()
     p.feed(html)
@@ -83,11 +92,20 @@ def main():
             antes = json.loads(OUT.read_text(encoding="utf-8"))
         except ValueError:
             antes = {}
-    if not robots_ok():
-        sys.exit("O robots.txt não permite buscar esta página. Nada foi feito.")
-    texto, meses = analisar(get(URL))
+    html = ""
+    try:
+        if not robots_ok():
+            falhar("O robots.txt não permite buscar esta página. Nada foi feito.")
+        html = get(URL)
+    except urllib.error.HTTPError as e:
+        falhar(f"HTTP {e.code} em {str(e.url).split('?')[0]}")
+    except urllib.error.URLError as e:
+        falhar(f"Falha de rede: {e.reason}")
+    except Exception as e:
+        falhar(f"{type(e).__name__}: {e}")
+    texto, meses = analisar(html)
     if not meses:
-        sys.exit("Nenhum mês encontrado (idioma ou layout mudou). Confira o Sumário à mão.")
+        falhar(f"Nenhum mês encontrado (HTML com {len(html)} bytes, texto com {len(texto)} caracteres). Idioma ou layout mudou.")
     hoje = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     topo = meses[0]
     th = hashlib.sha256(texto.encode("utf-8")).hexdigest()[:16]
@@ -104,6 +122,7 @@ def main():
         "textoMudouEm": hoje if texto_mudou else antes.get("textoMudouEm"),
     }
     OUT.parent.mkdir(parents=True, exist_ok=True)
+    ERRO.unlink(missing_ok=True)
     OUT.write_text(json.dumps(saida, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Mês mais recente: {topo}. {'Mês novo detectado.' if novo else 'Sem mudança de mês.'}")
 

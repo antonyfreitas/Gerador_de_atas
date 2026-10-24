@@ -13,19 +13,21 @@ jobs:
   verificar:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
       - name: Verificar o Sumário de atualizações
         run: python scripts/check_manual.py
       - name: Gravar o resultado
+        if: always()
         run: |
           git config user.name "manual-monitor"
           git config user.email "manual-monitor@users.noreply.github.com"
-          git add data/manual-status.json
+          git add -A data
           git diff --cached --quiet || (git commit -m "Manual: verificação $(date -u +%F)" && git push)
       - name: Pedir a publicação do site
+        if: always()
         continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
